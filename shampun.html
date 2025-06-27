@@ -69,8 +69,8 @@
         }
 
         .flame {
-            width: 50px;
-            height: 50px;
+            width: 80px;
+            height: 80px;
             background: #ffaa00;
             border-radius: 50%;
             margin: 0 auto 20px;
@@ -133,7 +133,42 @@
             margin-bottom: 10px !important;
         }
     }
-
+   .minute-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        padding: 15px 30px;
+        background: #d32f2f;
+        color: white;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 9999;
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        transition: all 0.3s;
+        border: 2px solid #fff;
+    }
+    
+    .minute-button:hover {
+        background: #b71c1c;
+        transform: scale(1.05);
+    }
+    
+    #memorialVideo {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 1s;
+    }
+    
+    .video-active {
+        opacity: 0.8 !important;
+    }
     </style>
 </head>
 <body>
@@ -160,8 +195,57 @@
             this.style.animation = 'none';
             setTimeout(() => {
                 this.style.animation = 'flicker 2s infinite';
-            }, 50);
+            }, 150);
         });
     </script>
+
+<div class="minute-button" id="minuteBtn">МИНУТА МОЛЧАНИЯ</div>
+
+
+<video id="memorialVideo" loop muted>
+    <source src="images/clideo_editor_b01a8f49632346fea1fcc1a90edad5b6 (online-video-cutter.com).mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+</video>
+
+
+<audio id="memorialAudio">
+    <source src="images/clideo_editor_b01a8f49632346fea1fcc1a90edad5b6-_online-video-cutter.com_ (mp3cut.net).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.getElementById('minuteBtn').addEventListener('click', function() {
+    const video = document.getElementById('memorialVideo');
+    const audio = document.getElementById('memorialAudio');
+
+    video.classList.add('video-active');
+    video.play();
+    
+    audio.volume = 1.0;
+    audio.play();
+    
+
+    if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200]);
+    }
+    
+  
+    setTimeout(() => {
+        video.pause();
+        video.classList.remove('video-active');
+        audio.pause();
+        audio.currentTime = 0;
+    }, 60000);
+
+    this.textContent = "МИНУТА МОЛЧАНИЯ...";
+    this.style.background = "#333";
+    this.style.cursor = "default";
+
+    setTimeout(() => {
+        this.textContent = "МИНУТА МОЛЧАНИЯ";
+        this.style.background = "#d32f2f";
+        this.style.cursor = "pointer";
+    }, 60000);
+});
+</script>
 </body>
 </html>
