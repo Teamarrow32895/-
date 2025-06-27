@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СХОД-РАЗВАЛ</title>
+    <style>
+    body {
+        background: #0a0a0a;
+        color: #fff;
+        margin: 0;
+        padding: 20px;
+        font-family: 'Arial', sans-serif;
+    }
+</style>
+</head>
+<body>
+    <div class="calculator" style="max-width: 500px; margin: 20px auto; padding: 20px; background: #1a1a1a; border-radius: 10px; border: 2px solid #ff4444;">
+        <h3 style="color: #fff; text-align: center; margin-bottom: 15px; text-transform: uppercase;">Расчет воды и жира(сход-развал)</h3>
+        
+        <div style="margin-bottom: 15px;">
+            <input type="number" id="userWeight" 
+                   placeholder="Введите вес в кг" 
+                   style="width: 95%; padding: 12px; background: #2a2a2a; border: 1px solid #ff4444; color: #fff; font-size: 16px; text-align: center;">
+        </div>
+        
+        <button onclick="calculateNorms()" 
+                style="width: 100%; padding: 12px; background: #d32f2f; color: #fff; border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s;">
+            Рассчитать
+        </button>
+        
+        <div id="warningMessage" style="display: none; margin-top: 15px; padding: 15px; background: #4a0000; color: #ff5555; text-align: center; font-weight: bold; border: 2px solid #ff0000;"></div>
+    </div>
+    
+    <script>
+    function calculateNorms() {
+        const weight = parseFloat(document.getElementById('userWeight').value);
+        const warningDiv = document.getElementById('warningMessage');
+    
+        
+        if(weight === 104) {
+            warningDiv.innerHTML = 'WARNING WARNING ТОЛСТЫЙ НА САЙТЕ';
+            alert("WARNING WARNING ТОЛСТЫЙ НА САЙТЕ") ;
+            warningDiv.style.display = 'block';
+            
+          
+            setTimeout(() => {
+                sessionStorage.removeItem('authenticated');
+                window.location.href = 'login.html';
+            }, 2500);
+            return;
+        }
+        if(weight === 103) {
+            warningDiv.innerHTML = '+-кг вроде';
+            alert("WARNING WARNING ТОЛСТЫЙ НА САЙТЕ") ;
+            warningDiv.style.display = 'block';
+            
+          
+            setTimeout(() => {
+                sessionStorage.removeItem('authenticated');
+                window.location.href = 'index.html';
+            }, 2500);
+            return;
+        }
+        if(weight === 13) {
+            warningDiv.innerHTML = '<h1>ШЛЮХА!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h1>';
+            alert("WARNING WARNING ПУТАНА НА САЙТЕ") ;
+            warningDiv.style.display = 'block';
+            
+          
+            setTimeout(() => {
+                sessionStorage.removeItem('authenticated');
+                window.location.href = 'index.html';
+            }, 2500);
+            return;
+        }
+    
+        
+        if(weight > 0 && weight < 250) {
+            const water = weight * 30;
+            const calories = weight * 35.1;
+            warningDiv.innerHTML = `
+                Норма воды: <span style="color:#00ff00">${water} мл/день</span><br>
+                Норма калорий: <span style="color:#00ff00">${calories} ккал</span>
+            `;
+            warningDiv.style.display = 'block';
+        } else {
+            warningDiv.innerHTML = 'ты не такой.';
+            warningDiv.style.display = 'block';
+        }
+    }
+    </script>
+</body>
+</html>

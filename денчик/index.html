@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ВХОД ЧЕРЕЗ  ТУЗ ДЕНА</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            background: #0a0a0a;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: 
+                linear-gradient(rgba(7, 150, 67, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(48, 160, 44, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .login-container {
+            background: rgba(0,0,0,0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(2, 143, 72, 0.3);
+            width: 350px;
+            position: relative;
+            overflow: hidden;
+            
+            transition: all 1s ease-out ;
+        }
+        .login-container:hover {
+            transform: scale(1.1);
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, #1bca15, transparent);
+            animation: laser 4s linear infinite;
+        }
+
+        .login-content {
+            position: relative;
+            z-index: 1;
+            background: #0a0a0a;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: #1bca15;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px #1bca15;
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            background: #1a1a1a;
+            border: 1px solid #1bca15;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            box-shadow: 0 0 15px rgba(2, 202, 102, 0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #1bca15;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        button:hover {
+            background: #1d8005;
+            transform: scale(1.05);
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+            
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #1bca15; }
+            to { text-shadow: 0 0 20px #1bca15; }
+        }
+
+        @keyframes laser {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (min-width: 768px) {
+            .login-container {
+                padding: 2rem;
+            }
+            .login-content {
+                padding: 2rem;
+            }
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            input, button {
+                padding: 15px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container::before {
+                animation: none;
+            }
+            input, button {
+                font-size: 0.9rem;
+            }
+            h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-height: 600px) and (orientation: landscape) {
+            body {
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+            .login-container {
+                margin: 10px auto;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-content">
+            <h1>ENTER IF YOU DEN (PEDICK)</h1>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Введи секретный код...">
+            </div>
+            <button onclick="checkPassword()">ПРОЙТИ</button>
+            <p class="error" id="error">Неверный код доступа!</p>
+        </div>
+    </div>
+
+    <script>
+
+       
+        let secretPassword = "DENERRORLIFE";
+
+        function checkPassword() {
+            const input = document.getElementById('password');
+            const error = document.getElementById('error');
+            
+            if(input.value === secretPassword) {
+                sessionStorage.setItem('authenticated', 'true');
+                window.location.href = "login.html"; 
+            } else {
+                error.style.display = 'block';
+                input.value = '';
+                setTimeout(() => {
+                    error.style.display = 'none';
+                }, 2000);
+            }
+        }
+
+       
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+                alert('Доступ запрещён!');
+                return false;
+            }
+        });
+    </script>
+    
+</body>
+</html>

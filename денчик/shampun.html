@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Памяти отца Шампуня</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Times New Roman', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .memorial-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .candle-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+                        url('images/candle.jpg') center/cover;
+            filter: brightness(0.7);
+            z-index: -1;
+        }
+
+        .memorial-content {
+            text-align: center;
+            max-width: 600px;
+            padding: 30px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ddaa66;
+        }
+
+        .dates {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        .epitaph {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .flame {
+            width: 50px;
+            height: 50px;
+            background: #ffaa00;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.9; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.9; transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .memorial-content { padding: 20px; }
+        }
+        
+    .candle-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: 
+            linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+            url('images/candle-mobile.jpg') center/cover;
+        filter: brightness(0.7);
+        z-index: -1;
+    }
+
+    @media (min-width: 768px) {
+        .candle-background {
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+                url('images/candle-desktop.jpg');
+        }
+    }
+
+    @media (max-width: 480px) and (orientation: portrait) {
+        .candle-background {
+            background-position: 50% 20%;
+            background-size: auto 150%;
+        }
+        
+        .memorial-content {
+            transform: scale(0.9);
+            margin-top: -30px;
+        }
+    }
+
+    @media (max-height: 600px) {
+        .candle-background {
+            background-size: auto 120%;
+        }
+        
+        .memorial-content {
+            padding: 15px !important;
+        }
+        
+        h1 {
+            font-size: 1.8rem !important;
+            margin-bottom: 10px !important;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <div class="memorial-container">
+        <div class="candle-background"></div>
+        <div class="memorial-content">
+            <div class="flame"></div>
+            <h1>Память Отцу Шампуня</h1>
+            <div class="dates">
+                1965 — 2023
+            </div>
+            <div class="epitaph">
+                "Великие души никогда не умирают,<br>
+                Они продолжают жить в наших сердцах.<br>
+                Твоя мудрость и любовь навсегда с нами."<br>
+                P.S если кружочек пульсирует значит его <br>
+                Отец по какой то причине еще не воскрес
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.flame').addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'flicker 2s infinite';
+            }, 50);
+        });
+    </script>
+</body>
+</html>
